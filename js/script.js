@@ -22,14 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
 		addForm.addEventListener('submit', (event) => {
 			event.preventDefault(); //отмена стандартного поведения браузера - ребут
 
-			const newFilm = addInput.nodeValue;
+			const newFilm = addInput.value;
 			const favorite = checkbox.checked; // получаеми чекбокс булиновый (атрибут checked)
+			
+			if (newFilm) {						// проверка на false (если пустая строка то ничего не делать)
+				movieDB.movies.push(newFilm);	
+				sortArr(movieDB.movies);
 
-			movieDB.movies.push(newFilm);
-			sortArr(movieDB.movies);
+				createMovieList(movieDB.movies, movieList);
 
-			createMovieList(movieDB.movies, movieList);
-
+			}			
 			event.target.reset(); //event.target = addForm, reset = сбросить содержимое формы
 
 		});
