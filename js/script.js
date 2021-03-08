@@ -22,10 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		addForm.addEventListener('submit', (event) => {
 			event.preventDefault(); //отмена стандартного поведения браузера - ребут
 
-			const newFilm = addInput.value;
+			let newFilm = addInput.value;
 			const favorite = checkbox.checked; // получаеми чекбокс булиновый (атрибут checked)
 			
 			if (newFilm) {						// проверка на false (если пустая строка то ничего не делать)
+
+				if (newFilm.length > 21) {
+					newFilm = `${newFilm.substring(0, 22)}...`;
+				}
 				movieDB.movies.push(newFilm);	
 				sortArr(movieDB.movies);
 
